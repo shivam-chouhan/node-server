@@ -1,4 +1,4 @@
-import { DataType } from "./interface.js";
+import { DataTypeOfUser } from "./interface.js";
 import { Role } from "./enum.js";
 import {dataFetch } from "./DataFetch.js";
 import { addEvent,removeEvent} from "./ButtonsAction.js";
@@ -8,7 +8,7 @@ import { addUserBtn, objAddUser } from "./addUser.js";
 
 
 export class UserTable{
-    getUsers(users:DataType[]){
+    getUsers(users:DataTypeOfUser[]){
        document.getElementById("loadData")!.style.display="none";
        document.getElementById("refreshData")!.style.display="block";
        document.getElementById("table")!.style.visibility="visible";
@@ -33,7 +33,7 @@ export class UserTable{
 
     let table :HTMLTableElement= document.getElementById("userData") as HTMLTableElement;
     let current:number = objUserTable.currentRow(row);
-    let deleteUrl = `http://localhost:5000/api/users${current}`;
+    let deleteUrl = `http://localhost:5000/api/getUsers/${current}`;
      fetch(deleteUrl)
      .catch((error) => {
         console.error('Error:', error);});

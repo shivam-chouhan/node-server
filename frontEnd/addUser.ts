@@ -1,4 +1,4 @@
-import { DataType } from "./interface";
+import { DataTypeOfUser } from "./interface";
 import { objUserTable } from "./userView.js";
 import { urlData } from "./DataFetch.js";
 
@@ -11,15 +11,15 @@ addUserBtn.setAttribute('class','w3-button refresh');
 document.body.appendChild(addUserBtn);
 addUserBtn.style.display = 'none'
 addUserBtn.onclick = async function(){
-    let users:DataType[]=  await fetch(urlData)
+    let users:DataTypeOfUser[]=  await fetch(urlData)
      .then(resp=>{return(resp.json())})
     objAddUser.addUserData(users);
 }
     }
-    addUserData(users:DataType[]){
+    addUserData(users:DataTypeOfUser[]){
         let i = users.length;
 
-        let addUser:DataType = {
+        let addUser:DataTypeOfUser = {
             "id": i,
             "firstName" :"",
             "middleName": "",
@@ -38,7 +38,7 @@ addUserBtn.onclick = async function(){
         let rowElement:Node=document.getElementById('edit'+i)!;
         let rowNumber = i;
         objUserTable.editRecord(rowElement , rowNumber);
-        fetch('http://localhost:5000/api/savedata', {
+        fetch('http://localhost:5000/api/saveUser', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
