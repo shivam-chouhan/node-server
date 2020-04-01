@@ -1,5 +1,5 @@
 import fs from "fs";
-import express, { urlencoded } from "express";
+import express from "express";
 import { router } from "./routes/api.js";
 import cors from "cors";
 

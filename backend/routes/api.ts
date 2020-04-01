@@ -1,7 +1,7 @@
 import express from "express"
 import { users } from "../server.js";
 import fs from "fs";
-import { DataType } from "../interface.js";
+import { DataTypeOfUser } from "../interface.js";
 export let router = express.Router();
 
 
@@ -10,10 +10,10 @@ export let router = express.Router();
 //     next()
 //   })
 
-router.get('/users',(req , res)=>{
+router.get('/getUsers',(req , res)=>{
     res.json(users);
 });
-router.get('/users:id', (req, res) => {
+router.get('/getUsers/:id', (req, res) => {
       users.splice(parseInt(req.params.id),1);
       console.log(req.url)
       let i = 0;
@@ -34,7 +34,7 @@ function updateDb(){
         }})
 }
           
-router.post('/savedata',(req , res)=>{
+router.post('/saveUser',(req , res)=>{
 users.push(req.body);
 res.status(200);
 updateDb();
@@ -42,12 +42,12 @@ res.send('success')
 
 })
 
-router.post('/updateuser:id', (req, res) => {
+router.post('/updateUser:id', (req, res) => {
     const found = users.some((member: { id: number; }) => member.id === parseInt(req.params.id));
   
     if (found) {
-      const updMember:DataType = req.body;
-      users.forEach((member:DataType) => {
+      const updMember:DataTypeOfUser = req.body;
+      users.forEach((member:DataTypeOfUser) => {
         if (member.id === parseInt(req.params.id)) {
           member.firstName = updMember.firstName;
           member.middleName = updMember.middleName;
